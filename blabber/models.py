@@ -19,26 +19,26 @@ class User(AbstractUser):
 
 class Post(models.Model):
     text = models.TextField()
-    file_upload = models.FileField(upload_to='post_file', null=True, blank=True)
-    posted_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
+    photo = models.ImageField(upload_to='photos/', null=True, blank=True)
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     date_posted = models.DateTimeField(auto_now_add=True)  # Date and time set at object creation
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
     def __str__(self):
         truncated_text = Truncator(self.text)
-        return truncated_text.chars(30)
+        return truncated_text.chars(50)
 
 
 class Comment(models.Model):
     text = models.TextField()
-    commented_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
-    commented_to = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
+    to = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     date_commented = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
     def __str__(self):
         truncated_text = Truncator(self.text)
-        return truncated_text.chars(30)
+        return truncated_text.chars(50)
 
 
 class Message(models.Model):
@@ -49,4 +49,4 @@ class Message(models.Model):
 
     def __str__(self):
         truncated_body = Truncator(self.body)
-        return truncated_body.chars(30)
+        return truncated_body.chars(50)
