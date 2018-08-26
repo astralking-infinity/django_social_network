@@ -1,0 +1,64 @@
+body {
+	margin: 0 auto;
+	max-width: 700px;
+	background-color: #ddd;
+}
+
+h3, .brand {
+	padding: 0;
+	margin: 0;
+}
+
+.nav {
+	background-color: #6a4;
+	padding: 5px;
+}
+
+.brand {
+	display: inline-block;
+}
+
+.navbar {
+	margin: 5px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.navbar li {
+	margin: 0 10px;
+	display: inline-block;
+}
+
+.navbar li a {
+	text-decoration: none;
+}
+
+.container {
+	padding: 5px;
+	border: 1px solid black;
+	background-color: #89f;
+}
+
+.container, #post-form {
+	margin: 10px;
+}
+
+.container-photo img {
+	width: 100%;
+}
+
+.container-header {
+	padding: 5px;
+	background-color: #444;
+}
+
+.container-avatar {
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+.fullname {
+	text-align: center;
+}
