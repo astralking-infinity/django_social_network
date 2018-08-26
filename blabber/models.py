@@ -24,6 +24,9 @@ class Post(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)  # Date and time set at object creation
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True)
 
+    class Meta:
+        ordering = ['-date_posted']
+
     def __str__(self):
         truncated_text = Truncator(self.text)
         return truncated_text.chars(50)
