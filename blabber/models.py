@@ -16,6 +16,11 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     friends = models.ManyToManyField('self', blank=True)
 
+    def get_avatar_url(self):
+        if self.avatar:
+            return self.avatar.url
+        return ''
+
 
 class Post(models.Model):
     text = models.TextField()
