@@ -1,49 +1,23 @@
 {% extends 'blabber/base.html' %}
 
-{% block title %}{{ user.get_full_name }}{% endblock %}
+{% block title %}{{ custom_user.get_full_name }}{% endblock %}
 
 {% block content %}
 	<div class="container-header">
 		<div class="container-avatar center">
-			<img src="{{ user.get_avatar_url }}" alt="Display photo">
+			<img src="{{ custom_user.get_avatar_url }}" alt="Display photo">
 		</div>
 		<div class="center-text">
-			<a href="{% url 'blabber:avatar' user.pk %}">Edit photo</a>
-			<h2>{{ user.get_full_name }}</h2>
+			{% if custom_user == user %}
+				<a href="{% url 'blabber:avatar' custom_user.pk %}">Edit photo</a>
+			{% endif %}
+			<h2>{{ custom_user.get_full_name }}</h2>
 		</div>
 	</div>
 
-	<div id="post-form">
-		<div class="container-avatar" style="width: 50px; height: 50px">
-			<img src="{{ user.get_avatar_url }}" alt="{{ user.get_full_name }}">
-		</div>
-		<form method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<button type="submit">Post</button>
-		</form>
-	</div>
-
-	{% if user.posts %}
-		{% for post in user.posts.all %}
-			<div class="container">
-				<a href="#"><h3>{{ post.created_by.get_full_name }}</h3></a>
-				<p>{{ post.text }}</p>
-
-				{% if post.photo %}
-					<div class="container-photo">
-						<img src="{{ post.photo.url }}">
-					</div>
-				{% endif %}
-
-				<p><small>{{ post.date_posted }}</small></p>
-				<div>
-					<a href="#">{{ post.likes.count }} Like</a>
-					<a href="#">{{ post.comments.count }} Comment</a>
-				</div>
-			</div>
-		{% endfor %}
-	{% else %}
-		<p>No post available</p>
+	{% if custom_user == user %}
+		{% include 'blabber/includes/post_form.html' %}
 	{% endif %}
+
+	{% include 'blabber/includes/post_list.html' with posts=custom_user.posts.all %}
 {% endblock %}

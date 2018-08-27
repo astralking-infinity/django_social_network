@@ -1,0 +1,22 @@
+{% if posts %}
+	{% for post in posts %}
+		<div class="container">
+			<a href="{% url 'blabber:profile' post.created_by.username %}"><h3>{{ post.created_by.get_full_name }}</h3></a>
+			<p>{{ post.text }}</p>
+
+			{% if post.photo %}
+				<div class="container-photo">
+					<img src="{{ post.photo.url }}">
+				</div>
+			{% endif %}
+
+			<p><small>{{ post.date_posted|timesince }}</small></p>
+			<div>
+				<a href="#">{{ post.likes.count }} Like</a>
+				<a href="#">{{ post.comments.count }} Comment</a>
+			</div>
+		</div>
+	{% endfor %}
+{% else %}
+	<p>No post available</p>
+{% endif %}
