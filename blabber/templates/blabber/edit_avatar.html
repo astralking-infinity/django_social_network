@@ -1,0 +1,13 @@
+{% extends 'blabber/base.html' %}
+
+{% block title %}Choose a photo{% endblock %}
+
+{% block content %}
+	<div>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+{% endblock %}
