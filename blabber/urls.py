@@ -7,4 +7,5 @@ app_name = 'blabber'
 urlpatterns = [
     path('home/', views.HomeView.as_view(), name='home'),
     path('<slug:username>/', views.ProfileView.as_view(), name='profile'),
+    path('avatar/change/<int:pk>/', views.AvatarView.as_view(), name='avatar'),
 ]
