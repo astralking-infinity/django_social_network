@@ -43,22 +43,25 @@ h3, .brand {
 	margin: 10px;
 }
 
-.container-photo img {
-	width: 100%;
-}
-
 .container-header {
 	padding: 5px;
-	background-color: #444;
+	background-color: #888;
+}
+
+.center-text {
+	text-align: center;
 }
 
 .container-avatar {
 	width: 100px;
 	height: 100px;
-	margin: 0 auto;
 	border: 1px solid black;
 }
 
-.fullname {
-	text-align: center;
+.center {	
+	margin: 0 auto;
+}
+
+img {
+	width: 100%;
 }
