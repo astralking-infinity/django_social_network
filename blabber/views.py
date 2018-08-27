@@ -1,7 +1,8 @@
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render_to_response, redirect
+from django.urls import reverse
 from django.views import generic
 
-from .forms import PostForm
+from .forms import PostForm, AvatarForm
 from .models import Post, User
 
 
@@ -48,3 +49,14 @@ class ProfileView(generic.DetailView):
             post.created_by = user
             post.save()
             return redirect('blabber:home')
+
+
+class AvatarView(generic.UpdateView):
+    model = User
+    form_class = AvatarForm
+    template_name = 'blabber/edit_avatar.html'
+
+    def get_success_url(self):
+        user = self.get_object()
+        url = reverse('blabber:profile', args=[user.username])
+        return url
