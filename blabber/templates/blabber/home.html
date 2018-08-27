@@ -5,11 +5,9 @@
 {% block content %}
 	<div id="post-form">
 		<a href="{% url 'blabber:profile' user.username %}">
-			{% if user.avatar %}
-				<img src="{{ user.avatar.url }}" alt="{{ user.get_full_name }}">
-			{% else %}
-				{{ user.get_full_name }}
-			{% endif %}
+			<div class="container-avatar" style="width: 50px; height: 50px">
+				<img src="{{ user.get_avatar_url }}" alt="{{ user.get_full_name }}">
+			</div>
 		</a>
 		<form method="post" enctype="multipart/form-data">
 			{% csrf_token %}
@@ -23,7 +21,6 @@
 			<div class="container">
 				<a href="{% url 'blabber:profile' post.created_by.username %}"><h3>{{ post.created_by.get_full_name }}</h3></a>
 				<p>{{ post.text }}</p>
-
 
 				{% if post.photo %}
 					<div class="container-photo">

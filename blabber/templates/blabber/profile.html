@@ -4,20 +4,19 @@
 
 {% block content %}
 	<div class="container-header">
-		<div class="container-avatar">
-			<img src="" alt="Display photo">
+		<div class="container-avatar center">
+			<img src="{{ user.get_avatar_url }}" alt="Display photo">
 		</div>
-		<h2 class="fullname">{{ user.get_full_name }}</h2>
+		<div class="center-text">
+			<a href="{% url 'blabber:avatar' user.pk %}">Edit photo</a>
+			<h2>{{ user.get_full_name }}</h2>
+		</div>
 	</div>
 
 	<div id="post-form">
-		<a href="#">
-			{% if user.avatar %}
-				<img src="{{ user.avatar.url }}" alt="Photo">
-			{% else %}
-				{{ user.get_full_name }}
-			{% endif %}
-		</a>
+		<div class="container-avatar" style="width: 50px; height: 50px">
+			<img src="{{ user.get_avatar_url }}" alt="{{ user.get_full_name }}">
+		</div>
 		<form method="post" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p }}
