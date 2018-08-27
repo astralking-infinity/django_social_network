@@ -31,6 +31,7 @@ class HomeView(generic.ListView):
 class ProfileView(generic.DetailView):
     model = User
     template_name = 'blabber/profile.html'
+    context_object_name = 'custom_user'
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
