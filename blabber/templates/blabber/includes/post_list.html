@@ -12,7 +12,7 @@
 
 			<p><small>{{ post.date_posted|timesince }}</small></p>
 			<div>
-				<a href="#">{{ post.likes.count }} Like</a>
+				<a href="{% url 'blabber:like_toggle' post.pk %}">{{ post.likes.count }} Like</a>
 				<a href="#">{{ post.comments.count }} Comment</a>
 			</div>
 		</div>
