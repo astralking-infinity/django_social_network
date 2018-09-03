@@ -68,6 +68,7 @@ img {
 
 .width-10 {
 	width: 10%;
+	vertical-align: top;
 }
 
 .width-80 {
@@ -76,4 +77,16 @@ img {
 
 #id_text {
 	width: calc(100% - 5px);
+}
+
+.comment-box {
+	margin-left: 20px;
+	margin-top: 10px;
+	border-collapse: collapse;
+}
+
+.comment {
+	border: 1px solid black;
+	padding: 10px 10px 0 10px;
+	margin-top: 4px;
 }
