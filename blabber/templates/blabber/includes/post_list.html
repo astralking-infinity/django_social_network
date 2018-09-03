@@ -1,7 +1,8 @@
-{% if posts %}
+{% if posts.exists %}
 	{% for post in posts %}
 		<div class="container">
 			<a href="{% url 'blabber:profile' post.created_by.username %}"><h3>{{ post.created_by.get_full_name }}</h3></a>
+
 			<p>{{ post.text }}</p>
 
 			{% if post.photo %}
@@ -13,7 +14,29 @@
 			<p><small>{{ post.date_posted|timesince }}</small></p>
 			<div>
 				<a href="{% url 'blabber:like_toggle' post.pk %}">{{ post.likes.count }} Like</a>
-				<a href="#">{{ post.comments.count }} Comment</a>
+				<a href="#" class="collapse" data-total-comments="{{ post.comments.count }}">{{ post.comments.count }} Comment</a>
+			</div>
+
+			<div class="comment-box">
+				<div class="comments" hidden>
+					{% if post.comments.exists %}
+						{% for comment in post.comments.all %}
+							<div class="comment">
+								<a href="{% url 'blabber:profile' comment.created_by.username %}">{{ comment.created_by.get_full_name }}</a>
+
+								<p>{{ comment.text }}</p>
+
+								<p><small>{{ comment.date_commented|timesince }}</small></p>
+							</div>
+						{% endfor %}
+					{% endif %}
+				</div>
+
+				<form method="post">
+					{% csrf_token %}
+					<textarea type="text" name="comment" cols="50" rows="2"></textarea>
+					<button>Comment</button>
+				</form>
 			</div>
 		</div>
 	{% endfor %}
