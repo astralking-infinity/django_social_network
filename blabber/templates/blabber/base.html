@@ -32,5 +32,32 @@
 
 	{% block content %}{% endblock %}
 
+	<!-- 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ -->
+	{% block script %}
+		<script>
+			function showComments(event) {
+				event.preventDefault()
+				var totalComments = this.getAttribute('data-total-comments')
+
+				if (parseInt(totalComments) > 0) {
+					var commentBox = this.parentElement.nextElementSibling
+					var comments = commentBox.getElementsByClassName('comments')[0]
+
+					if (comments.hasAttribute('hidden')) {
+						comments.removeAttribute('hidden')
+					}
+				}
+			}
+
+			var comments = document.getElementsByClassName('collapse')
+
+			var i
+			for (i = 0; i < comments.length; i++) {
+				comments[i].addEventListener('click', showComments)
+			}
+
+		</script>
+	{% endblock %}
 </body>
 </html>
