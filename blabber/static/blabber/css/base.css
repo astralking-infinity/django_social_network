@@ -37,6 +37,7 @@ h3, .brand {
 	padding: 5px;
 	border: 1px solid black;
 	background-color: #89f;
+	overflow: hidden;
 }
 
 .container, #post-form {
