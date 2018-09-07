@@ -13,7 +13,7 @@
 
 			<p><small>{{ post.date_posted|timesince }}</small></p>
 			<div>
-				<a href="{% url 'blabber:like_toggle' post.pk %}">{{ post.likes.count }} Like</a>
+				<a href="{% url 'blabber:like_toggle' post.pk %}?next={{ request.path|urlencode }}">{{ post.likes.count }} Like</a>
 				<a href="#" class="collapse" data-total-comments="{{ post.comments.count }}">{{ post.comments.count }} Comment</a>
 			</div>
 
@@ -32,10 +32,16 @@
 					{% endif %}
 				</div>
 
-				<form method="post">
+				<form method="post" action="{% url 'blabber:comment' post.pk %}">
 					{% csrf_token %}
-					<textarea type="text" name="comment" cols="50" rows="2"></textarea>
-					<button>Comment</button>
+					<input type="hidden" name="next" value="{{ request.path }}">
+					<div style="float: left; width: 80%;">
+						{% for field in comment_form %}
+							{{ field }}
+						{% endfor %}
+					</div>
+						<button>Comment</button>
+					</div>
 				</form>
 			</div>
 		</div>
