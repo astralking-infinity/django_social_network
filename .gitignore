@@ -1,3 +1,6 @@
 venv
 __pycache__
 *.pyc
+# Local database
+*.sqlite3
+media/
